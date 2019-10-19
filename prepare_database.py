@@ -2,7 +2,7 @@
 """
 Created on Tue Oct 15 19:46:33 2019
 @author: S.Alireza Moazeni
-Datam ining Homework 1
+Data Mining Homework 1
 """
 from __future__ import print_function
 import pandas as pd
@@ -21,7 +21,7 @@ def insert_data_into_database(my_db):
         # if row["Country"] == "United States of America":
         #     x = 0
         continent = get_continent(row["Country"], country_continent)
-        #print(str(index) + " country : " + row["Country"] + " , continent : " + continent)
+        # print(str(index) + " country : " + row["Country"] + " , continent : " + continent)
         age_group = get_age_group(row["Age"])
         sql = "INSERT INTO `london12` (`id`, `continent`, `country`, `gender`, `agegroup`, `sport`, `gold`, `silver`, `bronze`) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
         val = (index + 1, continent, row["Country"], row["Gender"], age_group,
@@ -30,6 +30,7 @@ def insert_data_into_database(my_db):
     
     my_db.commit()
     print("All data successfully added to the database")
+
 
 def get_continent(country_input, continents):
     for index, continent_country in continents.iterrows():

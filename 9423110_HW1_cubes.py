@@ -2,10 +2,11 @@
 """
 Created on Tue Oct 15 14:21:12 2019
 @author: S.Alirzea Moazeni
-Data mining Homework 1
+Data Mining Homework 1
 """
 import olap_cubes.prepare_database as pdata
 from mysql import connector
+
 
 def main():
     my_db = connector.connect(
