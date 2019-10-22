@@ -3,13 +3,14 @@
 Created on Tue Oct 15 19:46:33 2019
 @author: S.Alireza Moazeni
 Data Mining Homework 1
+Part 2
 """
 from __future__ import print_function
 import pandas as pd
 
 
 def insert_data_into_database(my_db):
-    print("inserting the data into the database...")
+    print("Part 2: Inserting data to the database")
     # 1. Prepare SQL data in memory
     london12 = pd.read_csv('london12.csv')
     country_continent = pd.read_csv('countries_by_continent.csv')
@@ -27,9 +28,12 @@ def insert_data_into_database(my_db):
         val = (index + 1, continent, row["Country"], row["Gender"], age_group,
                row["Sport"], row["Gold Medals"], row["Silver Medals"], row["Bronze Medals"])
         my_cursor.execute(sql, val)
+        if index % 1000 == 0 and index != 0:
+            print(str(index) + " data added")
     
     my_db.commit()
     print("All data successfully added to the database")
+    print("#################################################")
 
 
 def get_continent(country_input, continents):

@@ -5,6 +5,7 @@ Created on Tue Oct 15 14:21:12 2019
 Data Mining Homework 1
 """
 import olap_cubes.prepare_database as pdata
+import olap_cubes.indexing as inx
 from mysql import connector
 
 
@@ -15,8 +16,12 @@ def main():
         passwd="",
         database="olapdb"
     )
+    # part 2 of HW
     pdata.insert_data_into_database(my_db)
-    
+
+    # part 3 of HW
+    inx.create_indexes_on_table(my_db)
+
     
 if __name__ == '__main__':
     main()
