@@ -21,7 +21,7 @@ def main():
     #pdata.insert_data_into_database(my_db)
 
     # part 3 of HW
-    inx.create_indexes_on_table(my_db)
+    #inx.create_indexes_on_table(my_db)
 
     # part 4 of HW
     part4.get_draw_statistics(my_db)
