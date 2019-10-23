@@ -7,6 +7,7 @@ Data Mining Homework 1
 import prepare_database as pdata
 import indexing as inx
 import drawing_figures as part4
+import generate_query as part6
 from mysql import connector
 
 
@@ -24,8 +25,11 @@ def main():
     #inx.create_indexes_on_table(my_db)
 
     # part 4 of HW
-    part4.get_draw_statistics(my_db)
+    #part4.get_draw_statistics(my_db)
 
-    
+    # part 6 of HW
+    part6.generate_query(my_db)
+
+
 if __name__ == '__main__':
     main()
