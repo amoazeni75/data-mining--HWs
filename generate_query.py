@@ -291,9 +291,87 @@ def get_most_in_progress_query(my_db):
 
     # sort deviation
     index = all_accepted_medals.index(max(all_accepted_medals))
-    print(bcolors.OKBLUE + "The Most progressive Query is :")
+    print(bcolors.OKBLUE + "The Most Progressive Query is :")
     print(all_accepted_query[index])
     print("The number of medals is : " + str(max(all_accepted_medals)))
 
 
-def get_sum_silver_bronze_medals_in_query_without_group_by(result):
+def get_sum_silver_bronze_medals_in_query_with_group_by(records):
+    sum_all_medals = 0
+    sum_bronze_silver = 0
+    for item in records:
+        sum_bronze_silver += item[-2]
+        sum_bronze_silver += item[-3]
+        sum_all_medals += item[-1]
+    ratio = 0
+    if sum_all_medals != 0:
+        ratio = sum_bronze_silver / sum_all_medals
+    return sum_all_medals, ratio
+
+
+def get_sum_silver_bronze_medals_in_query_without_group_by(records):
+    sum_all_medals = 0
+    sum_bronze_silver = 0
+    for item in records:
+        sum_bronze_silver += item[-1]
+        sum_bronze_silver += item[-2]
+        sum_all_medals += item[-1]
+        sum_all_medals += item[-2]
+        sum_all_medals += item[-3]
+    ratio = 0
+    if sum_all_medals != 0:
+        ratio = sum_bronze_silver / sum_all_medals
+    return sum_all_medals, ratio
+
+
+def get_most_developed_query(my_db):
+    print(bcolors.OKGREEN + "Calculation Part D of Question 6 ...")
+    my_cursor = my_db.cursor()
+    all_accepted_query = []
+    all_accepted_medals = []
+    for query in all_result_query:
+        my_cursor.execute(query)
+        result = my_cursor.fetchall()
+        # do not have group by
+        sum_medals = 0
+        if "GROUP" not in query:
+            sum_medals, ratio = get_sum_gold_medals_in_query_without_group_by(result)
+        # we do not have anything here, we must process all thing by ourselves
+        else:
+            sum_medals, ratio = get_sum_gold_medals_in_query_with_group_by(result)
+        if ratio >= 0.5:
+            all_accepted_query.append(query)
+            all_accepted_medals.append(sum_medals)
+
+    # sort deviation
+    index = all_accepted_medals.index(max(all_accepted_medals))
+    print(bcolors.OKBLUE + "The Most Developed Query is :")
+    print(all_accepted_query[index])
+    print("The number of medals is : " + str(max(all_accepted_medals)))
+
+
+def get_sum_gold_medals_in_query_with_group_by(records):
+    sum_all_medals = 0
+    sum_gold = 0
+    for item in records:
+        sum_gold += item[-4]
+        sum_all_medals += item[-1]
+    ratio = 0
+    if sum_all_medals != 0:
+        ratio = sum_gold / sum_all_medals
+    return sum_all_medals, ratio
+
+
+def get_sum_gold_medals_in_query_without_group_by(records):
+    sum_all_medals = 0
+    sum_gold = 0
+    for item in records:
+        sum_gold += item[-3]
+        sum_all_medals += item[-1]
+        sum_all_medals += item[-2]
+        sum_all_medals += item[-3]
+    ratio = 0
+    if sum_all_medals != 0:
+        ratio = sum_gold / sum_all_medals
+    return sum_all_medals, ratio
+

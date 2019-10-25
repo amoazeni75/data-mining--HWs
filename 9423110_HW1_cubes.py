@@ -31,6 +31,7 @@ def main():
     part6.generate_queries_template()
     part6.get_query_with_most_medals_deviation(my_db)
     part6.get_most_ratio_medals_records(my_db)
+    part6.get_most_in_progress_query(my_db)
 
 if __name__ == '__main__':
     main()
