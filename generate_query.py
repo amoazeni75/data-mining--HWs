@@ -294,3 +294,6 @@ def get_most_in_progress_query(my_db):
     print(bcolors.OKBLUE + "The Most progressive Query is :")
     print(all_accepted_query[index])
     print("The number of medals is : " + str(max(all_accepted_medals)))
+
+
+def get_sum_silver_bronze_medals_in_query_without_group_by(result):
