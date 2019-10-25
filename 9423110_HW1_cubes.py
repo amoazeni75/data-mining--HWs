@@ -4,10 +4,10 @@ Created on Tue Oct 15 14:21:12 2019
 @author: S.Alirzea Moazeni
 Data Mining Homework 1
 """
-import prepare_database as pdata
-import indexing as inx
-import drawing_figures as part4
-import generate_query as part6
+import olap_cubes.prepare_database as pdata
+import olap_cubes.indexing as inx
+import olap_cubes.drawing_figures as part4
+import olap_cubes.generate_query as part6
 from mysql import connector
 
 
@@ -28,7 +28,8 @@ def main():
     #part4.get_draw_statistics(my_db)
 
     # part 6 of HW
-    part6.generate_query(my_db)
+    part6.generate_queries_template()
+    # part6.get_most_deviation()
 
 
 if __name__ == '__main__':
