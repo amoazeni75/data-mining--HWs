@@ -27,7 +27,6 @@ def create_indexes_on_table(my_db):
             except:
                 print("The index did not exist in the table")
             my_cursor.execute(sql_command_add)
-            # print(sql_command)
     my_db.commit()
     print("#################################################")
 

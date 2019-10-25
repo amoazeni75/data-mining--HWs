@@ -19,19 +19,22 @@ def main():
         database="olapdb"
     )
     # part 2 of HW
-    #pdata.insert_data_into_database(my_db)
+    pdata.insert_data_into_database(my_db)
 
     # part 3 of HW
-    #inx.create_indexes_on_table(my_db)
+    inx.create_indexes_on_table(my_db)
 
     # part 4 of HW
-    #part4.get_draw_statistics(my_db)
+    part4.get_draw_statistics(my_db)
 
     # part 6 of HW
     part6.generate_queries_template()
     part6.get_query_with_most_medals_deviation(my_db)
     part6.get_most_ratio_medals_records(my_db)
     part6.get_most_in_progress_query(my_db)
+    part6.get_most_developed_query(my_db)
+
 
 if __name__ == '__main__':
     main()
+

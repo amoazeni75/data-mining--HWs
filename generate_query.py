@@ -52,6 +52,7 @@ def generate_queries_template():
         get_final_query_with_value(query_temp, query_values)
 
     print(bcolors.HEADER + "All Queries with Values : ")
+    xx = len(all_result_query)
     for i in all_result_query:
         print(bcolors.OKGREEN + i)
 

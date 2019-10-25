@@ -3,7 +3,7 @@
 Created on Tue Oct 15 19:46:33 2019
 @author: S.Alireza Moazeni
 Data Mining Homework 1
-Part 2
+Part 2 : preparing database
 """
 from __future__ import print_function
 import pandas as pd
@@ -19,10 +19,7 @@ def insert_data_into_database(my_db):
     my_cursor.execute("ALTER TABLE  `london12` AUTO_INCREMENT = 1")
     my_db.commit()
     for index, row in london12.iterrows():
-        # if row["Country"] == "United States of America":
-        #     x = 0
         continent = get_continent(row["Country"], country_continent)
-        # print(str(index) + " country : " + row["Country"] + " , continent : " + continent)
         age_group = get_age_group(row["Age"])
         sql = "INSERT INTO `london12` (`id`, `continent`, `country`, `gender`, `agegroup`, `sport`, `gold`, `silver`, `bronze`) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
         val = (index + 1, continent, row["Country"], row["Gender"], age_group,
@@ -38,8 +35,6 @@ def insert_data_into_database(my_db):
 
 def get_continent(country_input, continents):
     for index, continent_country in continents.iterrows():
-        # if continent_country["Country"] == "United Arab Emirates":
-        #     x = 0
         if check_equality_countries(country_input, continent_country["Country"]):
             return continent_country["Continent"]
     return -1
