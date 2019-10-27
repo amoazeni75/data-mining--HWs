@@ -21,6 +21,7 @@ def get_draw_statistics(my_db):
     my_cursor.execute(sql_query_get_medals)
     result_continent_medals = my_cursor.fetchall()
     draw_circle_continent_medals(result_continent_medals)
+    draw_circle_distribution_continent_medal(result_continent_medals)
 
     # part c
     sql_query_ratio_country_medals = "SELECT country, count(id) as num_participants, " \
@@ -69,12 +70,26 @@ def auto_label(rects, ax):
                     ha='center', va='bottom')
 
 
+def draw_circle_distribution_continent_medal(list_continent):
+    label = []
+    medals = []
+    for continent in list_continent:
+        num_medals = continent[1] + continent[2] + continent[3]
+        medals.append(num_medals)
+        label.append(continent[0])
+    fig, axs = plt.subplots()
+    axs.pie(medals, labels=label, autopct='%1.1f%%', shadow=False, startangle=90)
+    axs.axis('equal')
+    axs.set_title("Distribution of Medals in Continent")
+    plt.show()
+
+
 def draw_circle_continent_medals(list_continent):
     labels = ["Gold", "Silver", "Bronze"]
     medals = []
     for continent in list_continent:
         num_medals = continent[1] + continent[2] + continent[3]
-        if num_medals == 0 :
+        if num_medals == 0:
             perc_medal = [0.0, 0.0, 0.0]
         else:
             perc_medal = [format((continent[1]/num_medals) * 100, '.4g'),
