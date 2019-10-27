@@ -73,14 +73,17 @@ def auto_label(rects, ax):
 def draw_circle_distribution_continent_medal(list_continent):
     label = []
     medals = []
+    sum_medals = 0
     for continent in list_continent:
         num_medals = continent[1] + continent[2] + continent[3]
+        sum_medals += num_medals
         medals.append(num_medals)
         label.append(continent[0])
+    for index in enumerate(medals):
+        medals[index] = format((medals[index]/sum_medals) * 100, '.4g')
     fig, axs = plt.subplots()
     axs.pie(medals, labels=label, autopct='%1.1f%%', shadow=False, startangle=90)
     axs.axis('equal')
-    axs.set_title("Distribution of Medals in Continent")
     plt.show()
 
 
