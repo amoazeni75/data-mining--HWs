@@ -1,5 +1,8 @@
+import Q1 as question1
+
+
 def main():
-    print("Hello World!")
+    question1.run()
 
 
 if __name__ == "__main__":
