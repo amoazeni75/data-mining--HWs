@@ -26,7 +26,7 @@ def calculate_weight_vector(X, Y):
     x_new = np.array(X)
     x_new_transpose = x_new.transpose()
     temp = np.dot(x_new_transpose, x_new)
-    temp = temp + 0.001 * np.identity(x_new_transpose.shape[0], dtype=float)
+    temp = temp + 0.0001 * np.identity(x_new_transpose.shape[0], dtype=float)
     temp = np.linalg.inv(temp)
     temp = np.dot(temp, x_new_transpose)
     temp = np.dot(temp, Y)
@@ -51,24 +51,35 @@ def evaluate_model(y_out, y_star):
     :return: error value
     """
     error = 0
-    number_of_correct_predicted = 0
+    TP = 0
+    TN = 0
+    FP = 0
+    FN = 0
     for index, i in enumerate(y_out):
         error += math.pow((y_out[index] - y_star[index]), 2)
         if y_out[index] >= 0.5:
             z = 1
         else:
             z = 0
-        if z == y_star[index]:
-            number_of_correct_predicted += 1
+        if y_star[index] == 1 and z == 1:
+            TP += 1
+        elif y_star[index] == 1 and z == 0:
+            FN += 1
+        elif y_star[index] == 0 and z == 0:
+            TN += 1
+        elif y_star[index] == 0 and z == 1:
+            FP += 1
+
     error = math.sqrt(error)
-    return error, number_of_correct_predicted
+    return error, TP, TN, FP, FN
 
 
 def run():
     training_set, y_star = read_dataset('diabetes.csv')
     weight_vector = calculate_weight_vector(training_set, y_star)
     y_out = calculate_y_out(training_set, weight_vector)
-    error, correct_predicted = evaluate_model(y_out, y_star)
+    error, TP, TN, FP, FN = evaluate_model(y_out, y_star)
     print("Sum of Squared Error: " + str(error))
-    print("Number of Correct Prediction: " + str(correct_predicted))
-    print("Accuracy: " + str((correct_predicted / len(y_out)) * 100) + "%")
+    print("Precision: " + str((TP / (TP + FP)) * 100) + " %")
+    print("Recall: " + str((TP / (TP + FN)) * 100) + " %")
+    print("Accuracy: " + str(((TP + TN) / (TP + TN + FP + FN)) * 100) + " %")
