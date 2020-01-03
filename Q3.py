@@ -200,7 +200,6 @@ test_df = test_df.join(person_dummies_test)
 
 fig, (axis1, axis2) = plt.subplots(1, 2, figsize=(10, 5))
 
-# sns.factorplot('Person',data=titanic_df,kind='count',ax=axis1)
 sns.countplot(x='Person', data=titanic_df, ax=axis1)
 
 # average of survived for each Person(male, female, or child)
@@ -212,8 +211,7 @@ test_df.drop(['Person'], axis=1, inplace=True)
 
 # Pclass
 
-# sns.factorplot('Pclass',data=titanic_df,kind='count',order=[1,2,3])
-sns.factorplot('Pclass', 'Survived', order=[1, 2, 3], data=titanic_df, size=5)
+sns.catplot('Pclass', 'Survived', order=[1, 2, 3], data=titanic_df, height=5)
 
 # create dummy variables for Pclass column, & drop 3rd class as it has the lowest average of survived passengers
 pclass_dummies_titanic = pd.get_dummies(titanic_df['Pclass'])
@@ -236,5 +234,12 @@ X_train = titanic_df.drop("Survived", axis=1)
 Y_train = titanic_df["Survived"]
 X_test = test_df.drop("PassengerId", axis=1).copy()
 
+# Logistic Regression
+
+logreg = LogisticRegression()
+logreg.max_iter = 10000
+logreg.fit(X_train, Y_train)
+Y_pred = logreg.predict(X_test)
+print(logreg.score(X_train, Y_train))
 
 plt.show()
