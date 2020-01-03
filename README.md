@@ -4,3 +4,7 @@
 <h5> Diabetes Data Regression </h5>
 <p>In this section, we will try to classify patients with regression (trying to find exact matrix).
 </p> 
+
+<h5> Quora Insincere Questions Classification </h5>
+<p>In this section, we will try to prepare a model based on naive bayes to predict whether a given question is sincere or not,
+  details and dataset are available at this link:  https://www.kaggle.com/c/quora-insincere-questions-classification/data <p>
