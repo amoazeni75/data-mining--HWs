@@ -249,4 +249,17 @@ random_forest.fit(X_train, Y_train)
 Y_pred = random_forest.predict(X_test)
 print("Random Forest Score: " + str(random_forest.score(X_train, Y_train)))
 
+# get Correlation Coefficient for each feature using Logistic Regression
+coeff_df = DataFrame(titanic_df.columns.delete(0))
+coeff_df.columns = ['Features']
+coeff_df["Coefficient Estimate"] = pd.Series(logreg.coef_[0])
+
+# preview
+print(coeff_df)
+
+submission = pd.DataFrame({
+    "PassengerId": test_df["PassengerId"],
+    "Survived": Y_pred
+})
+submission.to_csv('titanic.csv', index=False)
 plt.show()
