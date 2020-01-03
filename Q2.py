@@ -2,6 +2,8 @@ from __future__ import unicode_literals
 from nltk.classify import NaiveBayesClassifier
 from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer
+
+stemmer = PorterStemmer()
 from nltk import ngrams
 
 import re
@@ -44,6 +46,27 @@ def preprocessing_baseline(list_of_sentences):
         processed = [word.lower() for word in sent.split()]
         remove_punc = [re.sub('[^a-zA-Z_]+', '', t) for t in processed]
         processed_sentences.append(remove_punc)
+
+    if len(processed_sentences) == len(list_of_sentences):
+        return processed_sentences
+    else:
+        print('Length of processed is different from input')
+
+
+def preprocessing_stpwrd_remvl(list_of_sentences):
+    """
+    Input is list of raw sentences.
+    Output is list of processed sentences.
+    Used for preprocessing methods S1, S2, S3
+    """
+
+    processed_sentences = []
+
+    for sent in list_of_sentences:
+        stemmed = [stemmer.stem(word).lower() for word in sent.split() if word.lower() not in stpwrds]
+        processed = [re.sub('[^a-zA-Z]+', '', t) for t in stemmed]
+        morethan3 = [t for t in processed if len(t) > 3]
+        processed_sentences.append(' '.join(morethan3))
 
     if len(processed_sentences) == len(list_of_sentences):
         return processed_sentences
