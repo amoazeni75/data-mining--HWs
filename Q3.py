@@ -240,6 +240,13 @@ logreg = LogisticRegression()
 logreg.max_iter = 10000
 logreg.fit(X_train, Y_train)
 Y_pred = logreg.predict(X_test)
-print(logreg.score(X_train, Y_train))
+print("Logistic Regression Score: " + str(logreg.score(X_train, Y_train)))
+
+# Random Forests
+
+random_forest = RandomForestClassifier(n_estimators=100)
+random_forest.fit(X_train, Y_train)
+Y_pred = random_forest.predict(X_test)
+print("Random Forest Score: " + str(random_forest.score(X_train, Y_train)))
 
 plt.show()
